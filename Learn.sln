@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn", "Learn\Learn.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LS2", "LS2\LS2.csproj", "{2358F33D-6928-48B0-AEDB-8186F4A29C42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LS3", "LS3\LS3.csproj", "{9AAC2FE6-A13D-485E-8965-53B988F999BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LS4", "LS4\LS4.csproj", "{5B2C48F2-8CDD-445D-9F6D-B7BAF2E081DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +24,14 @@ Global
 		{2358F33D-6928-48B0-AEDB-8186F4A29C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2358F33D-6928-48B0-AEDB-8186F4A29C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2358F33D-6928-48B0-AEDB-8186F4A29C42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AAC2FE6-A13D-485E-8965-53B988F999BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AAC2FE6-A13D-485E-8965-53B988F999BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AAC2FE6-A13D-485E-8965-53B988F999BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AAC2FE6-A13D-485E-8965-53B988F999BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B2C48F2-8CDD-445D-9F6D-B7BAF2E081DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B2C48F2-8CDD-445D-9F6D-B7BAF2E081DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B2C48F2-8CDD-445D-9F6D-B7BAF2E081DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B2C48F2-8CDD-445D-9F6D-B7BAF2E081DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
