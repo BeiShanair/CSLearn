@@ -17,7 +17,7 @@
             #region 场景设置
 
             int nowScreenId = 1;
-            
+            string str = "";
             while (true)
             {
                 switch (nowScreenId)
@@ -114,7 +114,8 @@
                         int pAtkMax = 16;
                         string pIco = "P";
                         ConsoleColor pColor = ConsoleColor.Yellow;
-                        
+                        bool isFight = false;
+
                         #endregion
 
                         #region boss属性
@@ -126,8 +127,16 @@
                         int bAtkMax = 15;
                         string bIco = "B";
                         ConsoleColor bColor = ConsoleColor.Green;
-                        
+
                         #endregion
+
+                        int cX = 24;
+                        int cY = 5;
+                        string cIco = "C";
+                        ConsoleColor cColor = ConsoleColor.Blue;
+
+                        bool isOver = false;
+
                         while (true)
                         {
                             if (bHp > 0)
@@ -135,6 +144,13 @@
                                 Console.ForegroundColor = bColor;
                                 Console.SetCursorPosition(BossX, BossY);
                                 Console.Write(bIco);
+                            }
+                            else
+                            {
+                                Console.SetCursorPosition(cX, cY);
+                                Console.ForegroundColor = cColor;
+                                Console.Write(cIco);
+
                             }
 
                             Console.ForegroundColor = pColor;
@@ -144,57 +160,180 @@
                             char input2 = Console.ReadKey(true).KeyChar;
                             Console.SetCursorPosition(pX, pY);
                             Console.Write(" ");
-                            switch (input2)
+
+                            if (isFight)
                             {
-                                case 'w':
-                                case 'W':
-                                    pY--;
-                                    if (pY < 1)
+                                if (input2 == 'j' || input2 == 'J')
+                                {
+                                    if (pHp <= 0)
                                     {
-                                        pY++;
-                                    }
-                                    else if (pY == BossY && pX == BossX && bHp > 0)
-                                    {
-                                        pY++;
-                                    }
+                                        nowScreenId = 3;
                                         break;
-                                case 's':
-                                case 'S':
-                                    pY++;
-                                    if (pY > height - 7)
-                                    {
-                                        pY--;
                                     }
-                                    else if (pY == BossY && pX == BossX && bHp > 0)
+                                    else if (bHp <= 0)
                                     {
-                                        pY--;
+                                        Console.SetCursorPosition(BossX, BossY);
+                                        Console.Write("  ");
+                                        isFight = false;
                                     }
-                                    break;
-                                case 'a':
-                                case 'A':
-                                    pX--;
-                                    if (pX < 1)
+                                    else
                                     {
-                                        pX++;
-                                    }
-                                    else if (pY == BossY && pX == BossX && bHp > 0)
-                                    {
-                                        pX++;
-                                    }
-                                    break;
-                                case 'd':
-                                case 'D':
-                                    pX++;
-                                    if (pX > width - 2)
-                                    {
-                                        pX--;
-                                    }
-                                    else if (pY == BossY && pX == BossX && bHp > 0)
-                                    {
-                                        pX--;
-                                    }
-                                    break;
+                                        #region 玩家攻击
+                                        Random r = new Random();
+                                        int pAtk = r.Next(pAtkMin, pAtkMax + 1);
+                                        bHp -= pAtk;
+                                        Console.ForegroundColor = ConsoleColor.Green;
+                                        Console.SetCursorPosition(2, height - 4);
+                                        Console.Write("                                       ");
+                                        Console.SetCursorPosition(2, height - 4);
+                                        Console.Write("你对boss造成了{0}伤害，boss剩余血量：{1}", pAtk, bHp);
+                                        #endregion
+
+                                        #region boss攻击
+                                        if (bHp > 0)
+                                        {
+                                            int bAtk = r.Next(bAtkMin, bAtkMax + 1);
+                                            pHp -= bAtk;
+                                            Console.ForegroundColor = ConsoleColor.Yellow;
+                                            Console.SetCursorPosition(2, height - 3);
+                                            Console.Write("                                       ");
+
+                                            if (pHp <= 0)
+                                            {
+                                                Console.SetCursorPosition(2, height - 3);
+                                                Console.Write("很遗憾~ 玩家卒~");
+                                                str = "你输了！";
+                                            }
+                                            else
+                                            {
+                                                Console.SetCursorPosition(2, height - 3);
+                                                Console.Write("boss对你造成{0}伤害，玩家剩余血量：{1}", bAtk, pHp);
+                                            }
+                                        }
+                                        #endregion
+
+                                        #region 胜利
+                                        else
+                                        {
+                                            Console.SetCursorPosition(2, height - 5);
+                                            Console.Write("                                       ");
+                                            Console.SetCursorPosition(2, height - 4);
+                                            Console.Write("                                       ");
+                                            Console.SetCursorPosition(2, height - 3);
+                                            Console.Write("                                       ");
+                                            Console.SetCursorPosition(2, height - 5);
+                                            Console.Write("恭喜你！胜利了！");
+                                        }
+                                        #endregion
+                                    }  
+                                }
                             }
+                            else
+                            {
+                                switch (input2)
+                                {
+                                    #region 玩家移动
+                                    case 'w':
+                                    case 'W':
+                                        pY--;
+                                        if (pY < 1)
+                                        {
+                                            pY++;
+                                        }
+                                        else if (pY == BossY && pX == BossX && bHp > 0)
+                                        {
+                                            pY++;
+                                        }
+                                        else if (pY == cY && pX == cX && bHp <= 0)
+                                        {
+                                            pY++;
+                                        }
+                                            break;
+                                    case 's':
+                                    case 'S':
+                                        pY++;
+                                        if (pY > height - 7)
+                                        {
+                                            pY--;
+                                        }
+                                        else if (pY == BossY && pX == BossX && bHp > 0)
+                                        {
+                                            pY--;
+                                        }
+                                        else if (pY == cY && pX == cX && bHp <= 0)
+                                        {
+                                            pY--;
+                                        }
+                                            break;
+                                    case 'a':
+                                    case 'A':
+                                        pX--;
+                                        if (pX < 1)
+                                        {
+                                            pX++;
+                                        }
+                                        else if (pY == BossY && pX == BossX && bHp > 0)
+                                        {
+                                            pX++;
+                                        }
+                                        else if (pY == cY && pX == cX && bHp <= 0)
+                                        {
+                                            pX++;
+                                        }
+                                            break;
+                                    case 'd':
+                                    case 'D':
+                                        pX++;
+                                        if (pX > width - 2)
+                                        {
+                                            pX--;
+                                        }
+                                        else if (pY == BossY && pX == BossX && bHp > 0)
+                                        {
+                                            pX--;
+                                        }
+                                        else if (pY == cY && pX == cX && bHp <= 0)
+                                        {
+                                            pX--;
+                                        }
+                                            break;
+                                    #endregion
+
+                                    #region 玩家战斗
+                                    case 'j':
+                                    case 'J':
+                                        if ((pX == BossX && pY == BossY - 1 ||
+                                            pX == BossX && pY == BossY + 1 ||
+                                            pY == BossY && pX == BossX - 1 ||
+                                            pY == BossY && pX == BossX + 1) && bHp > 0)
+                                        {
+                                            isFight = true;
+                                            Console.SetCursorPosition(2, height - 5);
+                                            Console.ForegroundColor = ConsoleColor.White;
+                                            Console.Write("开始战斗，按J继续");
+                                            Console.SetCursorPosition(2, height - 4);
+                                            Console.Write("玩家血量{0}", pHp);
+                                            Console.SetCursorPosition(2, height - 3);
+                                            Console.Write("Boss血量{0}", bHp);
+                                        }
+                                        else if ((pX == cX && pY == cY - 1 ||
+                                            pX == cX && pY == cY + 1 ||
+                                            pY == cY && pX == cX - 1 ||
+                                            pY == cY && pX == cX + 1) && bHp <= 0)
+                                        {
+                                            nowScreenId = 3;
+                                            isOver = true;
+                                            str = "你赢了！";
+                                        }
+                                            break;
+                                    #endregion
+
+                                }
+                            }
+                            if (isOver)
+                            {
+                                break;
+                            } 
                         }
                         
                         break;
@@ -205,6 +344,65 @@
 
                     case 3:
                         Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.SetCursorPosition(width / 2 - 4, 5);
+                        Console.Write("GameOver");
+
+                        Console.SetCursorPosition(width / 2 - 4, 7);
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write(str);
+
+                        int nowSelectId2 = 1;
+                        bool nowExit2 = false;
+                        while (true)
+                        {
+                            Console.ForegroundColor = nowSelectId2 == 1 ? ConsoleColor.Red : ConsoleColor.White;
+                            Console.SetCursorPosition(width / 2 - 6, 13);
+                            Console.Write("回到开始界面");
+                            Console.ForegroundColor = nowSelectId2 == 2 ? ConsoleColor.Red : ConsoleColor.White;
+                            Console.SetCursorPosition(width / 2 - 4, 15);
+                            Console.Write("结束游戏");
+
+                            char input = Console.ReadKey(true).KeyChar;
+                            switch (input)
+                            {
+                                case 'w':
+                                case 'W':
+                                    nowSelectId2 -= 1;
+                                    if (nowSelectId2 < 1)
+                                    {
+                                        nowSelectId2 = 1;
+                                    }
+                                    break;
+                                case 's':
+                                case 'S':
+                                    nowSelectId2 += 1;
+                                    if (nowSelectId2 > 2)
+                                    {
+                                        nowSelectId2 = 2;
+                                    }
+                                    break;
+                                case 'j':
+                                case 'J':
+                                    switch (nowSelectId2)
+                                    {
+                                        case 1:
+                                            nowScreenId = 1;
+                                            nowExit2 = true;
+                                            break;
+                                        case 2:
+                                            Console.Clear();
+                                            Environment.Exit(0);
+                                            break;
+                                    }
+                                    break;
+                            }
+                            if (nowExit2)
+                            {
+                                break;
+                            }
+
+                        }
                         break;
 
                     #endregion
