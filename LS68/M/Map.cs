@@ -10,7 +10,7 @@ namespace LS68.M
 {
     class Map : IDraw
     {
-        private Wall[] walls;
+        public Wall[] walls;
 
         public Map()
         {
@@ -43,9 +43,9 @@ namespace LS68.M
 
         public void Draw()
         {
-            foreach (Wall wall in walls)
+            for (int i = 0; i < walls.Length; i++)
             {
-                wall.Draw();
+                walls[i].Draw();
             }
         }
     }
