@@ -179,6 +179,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LS95", "LS95\LS95.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LS96", "LS96\LS96.csproj", "{ED11354C-A5B9-435A-B36B-521B7AF2C816}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LS97", "LS97\LS97.csproj", "{DAFC2775-945F-4911-BD48-E781DEA0CBC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -537,6 +539,10 @@ Global
 		{ED11354C-A5B9-435A-B36B-521B7AF2C816}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED11354C-A5B9-435A-B36B-521B7AF2C816}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED11354C-A5B9-435A-B36B-521B7AF2C816}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAFC2775-945F-4911-BD48-E781DEA0CBC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAFC2775-945F-4911-BD48-E781DEA0CBC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAFC2775-945F-4911-BD48-E781DEA0CBC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAFC2775-945F-4911-BD48-E781DEA0CBC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
